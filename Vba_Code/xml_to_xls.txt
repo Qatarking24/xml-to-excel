@@ -1,0 +1,51 @@
+Rem Attribute VBA_ModuleType=VBAModule
+Option VBASupport 1
+Public Sub ConvertXmlToXlsx()
+
+Application.DisplayAlerts = False
+
+Dim objFSO As Object
+Dim objFolder As Object
+Dim objFile As Object
+Dim xmlColumn As String
+Dim xlsxColumn As String
+Dim xmlftype As String
+Dim Message As String
+Dim Junk As Integer
+Dim XMLF As Integer
+
+Junk = 0
+
+
+'Folder path. You can set it to a specific cell
+xmlFolder = ""
+convFolder = ""
+
+
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+Set objFolder = objFSO.GetFolder(xmlFolder)
+For Each objFile In objFolder.Files
+
+'Gets the type of the file
+xmlftype = objFile.Type
+
+'Calculating the total amount of Junk file
+Junk = Junk + 1
+
+    If UCase(Right(objFile.Name, Len(XML))) = UCase(XML) And xmlftype = "XML Document" Then
+        FNReplace = Replace(objFile.Name, ".xml", "")
+        NewFileName = convFolder & FNReplace & ".xls"
+        Set ConvertThis = Workbooks.Open(objFolder & "\" & objFile.Name)
+        ConvertThis.SaveAs Filename:=NewFileName, FileFormat:= _
+        xlWorkbookNormal
+        ConvertThis.Close
+        XMLF = XMLF + 1
+        Junk = Junk - 1
+    End If
+Next objFile
+'Converting XMLF and Junk to strings
+XMLF = CStr(XMLF)
+Junk = CStr(Junk)
+Message = "Total XML Files Converted: " & XMLF & vbNewLine & "Total Non-Converted Files: " & Junk
+MsgBox Message, vbOKOnly
+End Sub
