@@ -7,7 +7,7 @@ Convert multiple XML files to Excel files(XLS or XLSX).
 • Enable macro (if asked).  
 • Type in the path of the XML files folder in the first box.  
 • Type in the path of the XLS (or XLSX) folder (You create it).  
-• Press the Start button.  
+• Press Start.  
 
 
 # Credits
