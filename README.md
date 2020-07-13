@@ -1,5 +1,5 @@
 # xml-to-excel
-Convert multiple XML files to Excel files(xls or xlsx).
+Convert multiple XML files to Excel files(XLS or XLSX).
 
 
 # How to use
